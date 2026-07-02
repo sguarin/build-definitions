@@ -244,6 +244,8 @@ spec:
         test -z "${PARAM_NO_PROXY}" || export NO_PROXY="${PARAM_NO_PROXY}"
 
         RESULT_FILE="$(mktemp)"
+        ls -laR /workspace/ssh-directory/ || true
+        ls -laR /tekton/creds-secrets/ || true
         konflux-build-cli git-clone >"${RESULT_FILE}"
 
         printf "%s" "$(jq -r '.commit' "${RESULT_FILE}")" >"$(results.commit.path)"
